@@ -1,0 +1,33 @@
+buildscript {
+    repositories { jcenter() }
+
+    dependencies {
+        classpath 'com.netflix.nebula:nebula-dependency-recommender:3.1.0'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'nebula.dependency-recommender'
+
+group = 'de.roamingthings.playgrounds'
+version = '1.0-SNAPSHOT'
+
+description = "An essential build for Graphen functional testing"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+dependencyRecommendations {
+    mavenBom module: 'org.jboss.arquillian:arquillian-bom:1.1.9.Final'
+}
+
+dependencies {
+    testCompile group: 'org.jboss.arquillian.junit', name: 'arquillian-junit-container', version:'1.1.9.Final'
+    testCompile group: 'org.jboss.arquillian.graphene', name: 'arquillian-graphene', version:'2.0.3.Final'
+    testCompile group: 'junit', name: 'junit', version:'4.12'
+}
